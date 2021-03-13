@@ -1,0 +1,11 @@
+<h2>Provinces</h2>
+
+<div *ngFor="let province of provinces">
+
+  <h3>
+    <a [title]="province.name + ' details'" [routerLink]="['/provinces', province.id]">
+      {{ province.name }}
+    </a>
+  </h3>
+
+</div>

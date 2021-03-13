@@ -45,7 +45,7 @@ public class Pilot {
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
-            name = "provinces",
+            name = "pilot_province",
             joinColumns = @JoinColumn(name = "pilot_id"),
             inverseJoinColumns = @JoinColumn(name = "province_id")
     )
