@@ -33,6 +33,13 @@ export class ProvinceService {
     );
   }
 
+  addProvince(province: Province): Observable<Province> {
+    return this.http.post<Province>(this.provincesUrl, province, this.httpOptions)
+      .pipe(
+        catchError(this.handleError('addProvince', province))
+      );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error); // log to console instead

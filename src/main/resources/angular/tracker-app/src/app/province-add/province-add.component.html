@@ -1,0 +1,29 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">Add a province</div>
+  <div class="panel-body">
+    <form [formGroup]="provinceForm">
+      <label>
+        Name:
+        <input type="text" formControlName="name" required minlength="2" maxlength="255">
+      </label><br/>
+      <label>
+        capital:
+        <input type="text" formControlName="capital" required minlength="2" maxlength="255">
+      </label><br/>
+      <label>
+        Postal abbreviation:
+        <input type="text" formControlName="postalAbbr" required minlength="2" maxlength="2">
+      </label><br/>
+      <label>
+        ISO 3166 code:
+        <input type="text" formControlName="isoCode" required minlength="5" maxlength="5">
+      </label><br/>
+      <button (click)="addProvince()" [disabled]="!provinceForm.valid">Add Province</button>
+    </form>
+    <a [routerLink]="['']">Back</a>
+  </div>
+</div>
+
+
+
+
