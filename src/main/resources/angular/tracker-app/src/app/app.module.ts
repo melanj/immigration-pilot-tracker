@@ -5,20 +5,20 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { ProvinceListComponent } from './province-list/province-list.component';
-import { ProvinceEditorComponent } from './province-editor/province-editor.component';
+import { ProvinceDetailsComponent } from './province-details/province-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProvinceListComponent,
-    ProvinceEditorComponent
+    ProvinceDetailsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: ProvinceListComponent },
-      { path: 'provinces/:provinceId', component: ProvinceEditorComponent }
+      { path: 'provinces/:provinceId', component: ProvinceDetailsComponent }
     ], { enableTracing: true })
   ],
   providers: [],

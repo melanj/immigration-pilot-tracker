@@ -1,0 +1,12 @@
+<div class="panel panel-primary" *ngIf="province">
+  <div class="panel-heading">{{ province.name }}</div>
+  <div class="panel-body">
+    <div>
+      <p>Name : {{ province.name }}</p>
+      <p>Capital: {{ province.capital}}</p>
+      <p>Postal abbreviation: {{ province.postalAbbr}}</p>
+      <p>ISO 3166 code: {{ province.isoCode}}</p>
+    </div>
+    <a  [routerLink]="['']">Back</a>
+  </div>
+</div>

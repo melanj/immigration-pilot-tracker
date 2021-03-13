@@ -4,10 +4,10 @@ import {ProvinceService} from "../province.service";
 
 @Component({
   selector: 'app-province-editor',
-  templateUrl: './province-editor.component.html',
-  styleUrls: ['./province-editor.component.scss']
+  templateUrl: './province-details.component.html',
+  styleUrls: ['./province-details.component.scss']
 })
-export class ProvinceEditorComponent implements OnInit {
+export class ProvinceDetailsComponent implements OnInit {
   province;
 
   constructor(private route: ActivatedRoute,
