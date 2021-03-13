@@ -8,13 +8,17 @@ import com.californiasense.tracker.service.CommunityService;
 import com.californiasense.tracker.service.PilotService;
 import com.californiasense.tracker.service.ProvinceService;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -57,7 +61,15 @@ public class PilotController {
     @PostMapping
     public ResponseEntity<PilotDTO> createPilot(@RequestBody @Valid final PilotDTO pilotDTO) {
         Pilot pilot = mapToEntity(pilotDTO, new Pilot());
-        return new ResponseEntity<>(mapToDTO(pilotService.create(pilot), new PilotDTO()), HttpStatus.CREATED);
+        pilot = pilotService.create(pilot);
+        MultiValueMap<String, String> headers = new HttpHeaders();
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(pilot.getId())
+                .toUri();
+        headers.add(HttpHeaders.LOCATION, location.toString());
+        return new ResponseEntity<>(mapToDTO(pilot, new PilotDTO()), headers, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

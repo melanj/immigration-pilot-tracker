@@ -1,28 +1,22 @@
 package com.californiasense.tracker.controller;
 
-import com.californiasense.tracker.dto.PilotDTO;
 import com.californiasense.tracker.dto.ProvinceDTO;
-import com.californiasense.tracker.model.Pilot;
 import com.californiasense.tracker.model.Province;
 import com.californiasense.tracker.service.ProvinceService;
-
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.validation.Valid;
-
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -55,7 +49,15 @@ public class ProvinceController {
     @PostMapping
     public ResponseEntity<ProvinceDTO> createProvince(@RequestBody @Valid final ProvinceDTO provinceDTO) {
         Province province = mapToEntity(provinceDTO, new Province());
-        return new ResponseEntity<>(mapToDTO(provinceService.create(province), new ProvinceDTO()), HttpStatus.CREATED);
+        province = provinceService.create(province);
+        MultiValueMap<String, String> headers = new HttpHeaders();
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(province.getId())
+                .toUri();
+        headers.add(HttpHeaders.LOCATION, location.toString());
+        return new ResponseEntity<>(mapToDTO(province, new ProvinceDTO()), headers, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

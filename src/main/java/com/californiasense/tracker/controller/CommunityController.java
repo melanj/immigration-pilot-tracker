@@ -6,13 +6,17 @@ import com.californiasense.tracker.model.Province;
 import com.californiasense.tracker.service.CommunityService;
 import com.californiasense.tracker.service.ProvinceService;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,7 +57,15 @@ public class CommunityController {
             @RequestBody @Valid final CommunityDTO communityDTO) {
         Community community = new Community();
         mapToEntity(communityDTO, community);
-        return new ResponseEntity<>( mapToDTO(communityService.create(community), new CommunityDTO()), HttpStatus.CREATED);
+        community = communityService.create(community);
+        MultiValueMap<String, String> headers = new HttpHeaders();
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(community.getId())
+                .toUri();
+        headers.add(HttpHeaders.LOCATION, location.toString());
+        return new ResponseEntity<>( mapToDTO(community, new CommunityDTO()), headers, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
