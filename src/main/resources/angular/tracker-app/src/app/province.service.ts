@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Observable, of, throwError} from 'rxjs';
-import {catchError, retry, tap} from 'rxjs/operators';
-import { Province } from './province';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
+import {catchError, tap} from 'rxjs/operators';
+import {Province} from './province';
 
 @Injectable({
   providedIn: 'root'
