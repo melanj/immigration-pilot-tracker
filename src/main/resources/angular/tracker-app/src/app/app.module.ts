@@ -37,7 +37,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     RouterModule.forRoot([
       { path: '', component: ProvinceListComponent },
       { path: 'provinces/:provinceId', component: ProvinceDetailsComponent },
-      { path: 'add-province', component: ProvinceAddComponent }
+      { path: 'add-province', component: ProvinceAddComponent },
+      { path: 'add-community', component: CommunityAddComponent }
     ], { enableTracing: true })
   ],
   providers: [],

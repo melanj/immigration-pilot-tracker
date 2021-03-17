@@ -1,1 +1,22 @@
-<p>community-add works!</p>
+<div class="panel panel-primary">
+  <div class="panel-heading">Add a community</div>
+  <div class="panel-body">
+    <form [formGroup]="communityForm">
+      <label>
+        Name:
+        <input type="text" formControlName="name" required minlength="2" maxlength="255">
+      </label><br/>
+      <label>
+        Province:
+        <select formControlName="province" required>
+          <option *ngFor="let province of provinces" [ngValue]="province.id">
+            {{ province.name }}
+          </option>
+        </select>
+      </label><br/>
+      <button (click)="addCommunity()" [disabled]="!communityForm.valid">Add Community</button>
+    </form>
+    <a [routerLink]="['']">Back</a>
+  </div>
+</div>
+
