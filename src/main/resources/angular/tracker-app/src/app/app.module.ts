@@ -38,7 +38,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
       { path: '', component: ProvinceListComponent },
       { path: 'provinces/:provinceId', component: ProvinceDetailsComponent },
       { path: 'add-province', component: ProvinceAddComponent },
-      { path: 'add-community', component: CommunityAddComponent }
+      { path: 'add-community', component: CommunityAddComponent },
+      { path: 'add-pilot', component: PilotAddComponent }
     ], { enableTracing: true })
   ],
   providers: [],

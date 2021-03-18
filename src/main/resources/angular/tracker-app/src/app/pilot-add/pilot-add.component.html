@@ -1,1 +1,30 @@
-<p>pilot-add works!</p>
+<div class="panel panel-primary">
+  <div class="panel-heading">Add a Pilot</div>
+  <div class="panel-body">
+    <form [formGroup]="pilotForm">
+      <label>
+        Name:
+        <input type="text" formControlName="name" required minlength="2" maxlength="255">
+      </label><br/>
+      <label>
+        Provinces:
+        <select formControlName="provinces" multiple>
+          <option *ngFor="let province of provinces" [ngValue]="province.id">
+            {{ province.name }}
+          </option>
+        </select>
+      </label><br/>
+      <label>
+        Community:
+        <select formControlName="communities" >
+          <option *ngFor="let community of communities" [ngValue]="community.id">
+            {{ community.name }}
+          </option>
+        </select>
+      </label><br/>
+      <button (click)="addPilot()" [disabled]="!pilotForm.valid">Add Pilot</button>
+    </form>
+    <a [routerLink]="['']">Back</a>
+  </div>
+</div>
+
