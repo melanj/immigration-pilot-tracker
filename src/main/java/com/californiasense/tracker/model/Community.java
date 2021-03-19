@@ -32,7 +32,7 @@ public class Community {
     )
     private Long id;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)

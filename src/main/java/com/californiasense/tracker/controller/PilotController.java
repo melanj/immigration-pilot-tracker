@@ -61,6 +61,9 @@ public class PilotController {
     @PostMapping
     public ResponseEntity<PilotDTO> createPilot(@RequestBody @Valid final PilotDTO pilotDTO) {
         Pilot pilot = mapToEntity(pilotDTO, new Pilot());
+        //fix me : temporary workaround to fix create failure
+        long id = pilotService.findAll().stream().mapToLong(Pilot::getId).max().orElse(1) + 1;
+        pilot.setId(id);
         pilot = pilotService.create(pilot);
         MultiValueMap<String, String> headers = new HttpHeaders();
         URI location = ServletUriComponentsBuilder

@@ -36,14 +36,14 @@ public class Pilot {
     )
     private Long id;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "communities_id")
     private Community communities;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinTable(
             name = "pilot_province",
             joinColumns = @JoinColumn(name = "pilot_id"),
