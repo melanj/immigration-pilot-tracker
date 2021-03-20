@@ -35,7 +35,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: ProvinceListComponent },
+      { path: '', component: DashboardComponent },
+      { path: 'provinces', component: ProvinceListComponent },
       { path: 'provinces/:provinceId', component: ProvinceDetailsComponent },
       { path: 'add-province', component: ProvinceAddComponent },
       { path: 'add-community', component: CommunityAddComponent },
