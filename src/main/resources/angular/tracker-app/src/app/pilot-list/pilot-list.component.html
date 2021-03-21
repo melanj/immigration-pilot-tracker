@@ -1,1 +1,10 @@
-<p>pilot-list works!</p>
+<div class="panel panel-primary">
+  <div class="panel-heading">Pilots</div>
+  <div class="panel-body">
+    <div *ngFor="let pilot of pilots">
+      <a [title]="pilot.name + ' details'" [routerLink]="['/pilots', pilot.id]">
+        {{ pilot.name }}
+      </a>
+    </div>
+  </div>
+</div>

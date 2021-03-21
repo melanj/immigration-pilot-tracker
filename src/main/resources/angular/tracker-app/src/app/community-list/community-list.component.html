@@ -1,1 +1,10 @@
-<p>community-list works!</p>
+<div class="panel panel-primary">
+  <div class="panel-heading">Communities</div>
+  <div class="panel-body">
+    <div *ngFor="let community of communities">
+      <a [title]="community.name + ' details'" [routerLink]="['/communities', community.id]">
+        {{ community.name }}
+      </a>
+    </div>
+  </div>
+</div>
